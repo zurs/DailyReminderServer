@@ -1,0 +1,27 @@
+Notes: The token should be a mixture of the email and password in SHA-256
+
+
+Examples of API-calls:
+
+Register a new User:
+    method: POST
+    url: ~/register
+    json-body:
+        {"email":"your-email",
+         "token":"genereated-token"}
+    response: The user object in json
+
+Check token / Login user: // Not functional
+    method: GET
+    url: ~/{token}
+    response: A boolean, true or false, depends on if it exists or not
+
+Add Reminder:
+    method: POST
+    url: ~/{token}
+    json-body:
+        {"startTime":[start-time, int],
+         "endTime":[end-time, int],
+         "title":[title, string],
+         "days":[days, String/Special]
+         }
