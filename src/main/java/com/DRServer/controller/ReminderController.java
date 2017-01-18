@@ -2,6 +2,7 @@ package com.DRServer.controller;
 
 import com.DRServer.domain.Reminder;
 import com.DRServer.service.ReminderService;
+import com.DRServer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class ReminderController {
 
     ReminderService reminderService;
+    UserService userService;
 
     @Autowired
-    public ReminderController(ReminderService reminderService){
+    public ReminderController(ReminderService reminderService, UserService userService){
         this.reminderService = reminderService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/{token}", method = RequestMethod.POST)
@@ -32,8 +35,14 @@ public class ReminderController {
 
     @RequestMapping(value = "/{token}/{id}", method = RequestMethod.PUT)
     public Reminder getReminder(@PathVariable(value = "id") Long id,
+                                @PathVariable(value = "token") String token,
                                 @RequestBody Reminder reminder){
-        return reminderService.updateReminder(id, reminder);
+        if(userService.checkToken(token)) {
+            return reminderService.updateReminder(id, reminder);
+        }
+        else{
+            return new Reminder(0, 0, null, null);
+        }
     }
 
 }
