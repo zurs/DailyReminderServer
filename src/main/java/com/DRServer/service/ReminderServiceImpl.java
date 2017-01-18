@@ -26,6 +26,7 @@ public class ReminderServiceImpl implements ReminderService {
     public Reminder updateReminder(Long id, Reminder reminder) {
         reminder.setId(id);
         reminderRepository.save(reminder);
+        return reminder;
     }
 
     @Override
@@ -41,5 +42,12 @@ public class ReminderServiceImpl implements ReminderService {
         else{
             return null;
         }
+    }
+
+    @Override
+    public void setToDone(Long id) {
+        Reminder reminder = reminderRepository.findOne(id);
+        reminder.setDone(true);
+        reminderRepository.save(reminder);
     }
 }

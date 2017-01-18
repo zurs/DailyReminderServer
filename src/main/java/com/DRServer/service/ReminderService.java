@@ -17,4 +17,5 @@ public interface ReminderService {
 
     Reminder getReminder(Long id, String token);
 
+    void setToDone(Long id);
 }

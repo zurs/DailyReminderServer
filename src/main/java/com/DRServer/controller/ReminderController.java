@@ -34,7 +34,7 @@ public class ReminderController {
     }
 
     @RequestMapping(value = "/{token}/{id}", method = RequestMethod.PUT)
-    public Reminder getReminder(@PathVariable(value = "id") Long id,
+    public Reminder updateReminder(@PathVariable(value = "id") Long id,
                                 @PathVariable(value = "token") String token,
                                 @RequestBody Reminder reminder){
         if(userService.checkToken(token)) {
@@ -43,6 +43,15 @@ public class ReminderController {
         else{
             return new Reminder(0, 0, null, null);
         }
+    }
+
+    @RequestMapping(value = "/{token}/{id}/done", method = RequestMethod.PUT)
+    public void setReminderToDone(@PathVariable(value = "id") Long id,
+                                  @PathVariable(value = "token") String token){
+        if(!userService.checkToken(token)){
+            return;
+        }
+        reminderService.setToDone(id);
     }
 
 }
