@@ -11,7 +11,7 @@ public interface ReminderService {
 
     Reminder addReminder(Reminder reminder, String token);
 
-    Reminder updateReminder(Reminder reminder);
+    Reminder updateReminder(Long id, Reminder reminder);
 
     void deleteReminder(Long id);
 

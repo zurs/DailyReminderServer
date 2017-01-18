@@ -23,8 +23,9 @@ public class ReminderServiceImpl implements ReminderService {
     }
 
     @Override
-    public Reminder updateReminder(Reminder reminder) {
-        return null;
+    public Reminder updateReminder(Long id, Reminder reminder) {
+        reminder.setId(id);
+        reminderRepository.save(reminder);
     }
 
     @Override

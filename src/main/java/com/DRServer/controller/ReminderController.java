@@ -30,4 +30,10 @@ public class ReminderController {
         return reminderService.getReminder(id, token);
     }
 
+    @RequestMapping(value = "/{token}/{id}", method = RequestMethod.PUT)
+    public Reminder getReminder(@PathVariable(value = "id") Long id,
+                                @RequestBody Reminder reminder){
+        return reminderService.updateReminder(id, reminder);
+    }
+
 }
