@@ -54,4 +54,12 @@ public class ReminderController {
         reminderService.setToDone(id);
     }
 
+    @RequestMapping(value = "/{token}/all", method = RequestMethod.GET)
+    public String getChecksumOfReminders(@PathVariable(value = "token") String token){
+        if(!userService.checkToken(token)){
+            return "Not Authorized";
+        }
+        return reminderService.getSHA256OfAllReminders(token);
+    }
+
 }
